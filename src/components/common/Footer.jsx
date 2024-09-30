@@ -9,8 +9,8 @@ const Footer = () => {
         <div className="bg-black text-white pt-5 pb-2">
             <div>
                 <ul className="flex flex-col sm:flex-row justify-around pt-2">
-                    <li className="footer-common flex items-center gap-2"><CiMobile3 color="white" className="h-6 w-6 sm:h-10 sm:w-10" />+91 7025063771</li>
-                    <li className="footer-common flex items-center gap-2"><IoMailUnreadOutline color="white" className="h-6 w-6 sm:h-10 sm:w-10" />roshin@gmail.com</li>
+                    <li className="footer-common flex items-center gap-2"><CiMobile3 color="white" className="h-6 w-6 sm:h-10 sm:w-10" />+91 7025063771 , +91 9947953112</li>
+                    <li className="footer-common flex items-center gap-2"><IoMailUnreadOutline color="white" className="h-6 w-6 sm:h-10 sm:w-10" />primactivebuilders@gmail.com</li>
                     <li className="footer-common flex items-center gap-2"><CiLocationOn color="white" className="h-6 w-6 sm:h-10 sm:w-10" />Chambad, Anjarakkandy, Kannur</li>
                 </ul>
             </div>
