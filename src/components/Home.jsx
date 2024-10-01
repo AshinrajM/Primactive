@@ -1,11 +1,13 @@
 import { useState } from 'react'
+import emailjs from 'emailjs-com';
 import Navbar from './common/Navbar'
 import Footer from './common/Footer'
 import TopSection from './common/TopSection'
 import bg from '../assets/about.avif'
 import contact from '../assets/contact.jpg'
-
 import QuoteCard from './mui components/QuoteCard'
+
+
 
 const Home = () => {
 
@@ -64,6 +66,22 @@ const Home = () => {
 
         if (formIsValid) {
             // Handle form submission (e.g., send data to server)
+            emailjs.send(
+                'service_cm5v08s',
+                'template_9pjrzat',
+                formValues,
+                'plaXrSRqdpwsAT-7I'
+
+            )
+            .then((result)=>{
+                console.log('Email successfully sent!', result.text);
+                // Optionally reset form after submission
+                setFormValues({ email: '', phone: '', message: '' });
+            })
+            .catch((error) => {
+                console.error('Error sending email:', error);
+            });
+
             console.log('Form submitted:', formValues);
         }
     };
