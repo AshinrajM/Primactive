@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import emailjs from 'emailjs-com';
+import { TailSpin } from 'react-loader-spinner';
 import Navbar from './common/Navbar'
 import Footer from './common/Footer'
 import TopSection from './common/TopSection'
@@ -22,6 +23,8 @@ const Home = () => {
         phone: '',
         message: ''
     });
+
+    const [loading, setLoading] = useState(false);
 
     const validateEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -66,6 +69,7 @@ const Home = () => {
 
         if (formIsValid) {
             // Handle form submission (e.g., send data to server)
+            setLoading(true)
             emailjs.send(
                 'service_cm5v08s',
                 'template_9pjrzat',
@@ -73,14 +77,16 @@ const Home = () => {
                 'plaXrSRqdpwsAT-7I'
 
             )
-            .then((result)=>{
-                console.log('Email successfully sent!', result.text);
-                // Optionally reset form after submission
-                setFormValues({ email: '', phone: '', message: '' });
-            })
-            .catch((error) => {
-                console.error('Error sending email:', error);
-            });
+                .then((result) => {
+                    console.log('Email successfully sent!', result.text);
+                    // Optionally reset form after submission
+                    setFormValues({ email: '', phone: '', message: '' });
+                    setLoading(false)
+                })
+                .catch((error) => {
+                    console.error('Error sending email:', error);
+                    setLoading(false)
+                });
 
             console.log('Form submitted:', formValues);
         }
@@ -148,7 +154,44 @@ const Home = () => {
                         ></textarea>
                         {errors.message && <span className="text-red-500">{errors.message}</span>}
 
-                        <button type="submit" className="p-2 sm:p-5 bg-blue-500 text-white rounded-md w-full sm:w-44">Send</button>
+                        {/* <button type="submit" className="p-2 sm:p-5 bg-blue-500 text-white rounded-md w-full sm:w-44">Send</button> */}
+                        {/* <button
+                            type="submit"
+                            className="p-2 sm:p-5 bg-blue-500 text-white rounded-md w-full sm:w-44"
+                            disabled={loading}  // Disable button when loading
+                        >
+                            {loading ? (
+                                <div className="flex items-center justify-center">
+                                    <TailSpin
+                                        height="24"
+                                        width="24"
+                                        color="#ffffff"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                    <span className="ml-2"></span>
+                                </div>
+                            ) : 'Send'}
+                        </button> */}
+
+                        <button
+                            type="submit"
+                            className="p-2 sm:p-5 bg-blue-500 text-white rounded-md w-full sm:w-44 flex justify-center items-center"
+                            disabled={loading}  // Disable button when loading
+                        >
+                            {loading ? (
+                                <div className="flex items-center justify-center">
+                                    <TailSpin
+                                        height={20}  // Set a smaller height for mobile view
+                                        width={20}   // Set a smaller width for mobile view
+                                        color="#ffffff"
+                                        ariaLabel="loading-indicator"
+                                    />
+                                    <span className="ml-2 text-sm"></span> {/* Optional: add text beside loader */}
+                                </div>
+                            ) : 'Send'}
+                        </button>
+
+
                     </form>
                 </div>
             </div>
